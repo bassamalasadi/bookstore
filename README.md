@@ -5,8 +5,8 @@
 
 
 > ### Note
-> I assume  that you already installed `docker` and `docker-compose`
-> Install `docker` : https://docs.docker.com/get-docker/
+> I assume  that you already installed `docker` and `docker-compose`\
+> Install `docker` : https://docs.docker.com/get-docker/ \
 > Install `docker compose` : https://docs.docker.com/compose/install/
 
 
