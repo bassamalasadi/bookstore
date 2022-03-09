@@ -5,8 +5,8 @@ from django.test import TestCase, RequestFactory
 from rest_framework.test import APIRequestFactory
 
 from bookstore.models import Book, Writer
-from .views import BookListView, WriterListView, BookSubListView, \
-    WriterSubListView, SearchByGenres, CreateWriterView, CreateBookView
+from .views import BookListView, WriterListView, BookSubListView, WriterSubListView,\
+    SearchByGenres, CreateWriterView, CreateBookView, DeleteBookView, DeleteWriterView
 
 
 
@@ -131,3 +131,21 @@ class ApiTestView(TestCase):
 
         self.assertEqual(response.status_code , 201)
         self.assertEqual(response.data['book_name'], 'booktest_3')
+
+    def test_delete_book(self):
+        """ Test Delete a Book """
+
+        request = self.factory.delete(f'/deletebook/{self.book_1.id}', format='json')
+        view = DeleteBookView.as_view()
+        response = view(request, id=self.book_1.id)
+
+        self.assertEqual(response.status_code , 204)
+
+    def test_delete_writer(self):
+        """ Test Delete a Writer """
+
+        request = self.factory.delete(f'/deletewriter/{self.writer_1.id}', format='json')
+        view = DeleteWriterView.as_view()
+        response = view(request, id=self.writer_1.id)
+
+        self.assertEqual(response.status_code , 204)

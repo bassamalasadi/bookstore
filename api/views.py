@@ -1,7 +1,8 @@
 import json
 from django.shortcuts import render
-from django.core.exceptions import ValidationError
+
 from rest_framework import generics
+from rest_framework.response import Response
 
 from bookstore.models import Book, Writer
 from .serializer import BookSerializer, WriterSerializer
@@ -35,6 +36,27 @@ class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     pagination_class = SmallPagination
+
+
+class DeleteBookView(generics.DestroyAPIView):
+    """ Delete a book """
+    
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    lookup_field = 'id'
+
+    def delete(self, request, id):
+        return self.destroy(request, id)
+    
+class DeleteWriterView(generics.DestroyAPIView):
+    """ Delete a writer """
+
+    queryset = Writer.objects.all()
+    serializer_class = WriterSerializer
+    lookup_field = 'id'
+
+    def delete(self, request, id):
+        return self.destroy(request, id)
 
 
 class BookSubListView(generics.ListAPIView):
